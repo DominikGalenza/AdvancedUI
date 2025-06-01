@@ -14,4 +14,8 @@ class ADVANCEDUI_API AFrontendPlayerController : public APlayerController
 {
 	GENERATED_BODY()
 	
+protected:
+	//~ Begin APlayerController interface
+	virtual void OnPossess(APawn* aPawn) override;
+	//~ End APlayerController interface
 };
