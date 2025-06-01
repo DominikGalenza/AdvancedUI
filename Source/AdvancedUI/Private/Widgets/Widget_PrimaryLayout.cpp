@@ -2,6 +2,7 @@
 
 
 #include "Widgets/Widget_PrimaryLayout.h"
+#include "FrontendDebugHelper.h"
 
 UCommonActivatableWidgetContainerBase* UWidget_PrimaryLayout::FindWidgetStackByTag(const FGameplayTag& Tag) const
 {
@@ -17,6 +18,8 @@ void UWidget_PrimaryLayout::RegisterWidgetStack(UPARAM(meta = (Categories = "Fro
 		if (!RegisteredWidgetStackMap.Contains(StackTag))
 		{
 			RegisteredWidgetStackMap.Add(StackTag, Stack);
+
+			Debug::Print(TEXT("Widget stack registered under the tag ") + StackTag.ToString());
 		}
 	}
 }
