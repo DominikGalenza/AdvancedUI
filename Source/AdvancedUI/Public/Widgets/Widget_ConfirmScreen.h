@@ -50,6 +50,10 @@ class ADVANCEDUI_API UWidget_ConfirmScreen : public UWidget_ActivatableBase
 {
 	GENERATED_BODY()
 	
+public:
+	//Gets called outside of the class when this widget is constructed and before it's pushed to the modal stack
+	void InitConfirmScreen(UConfirmScreenInfoObject* ScreenInfoObject, TFunction<void(EConfirmScreenButtonType)> ClickedButtonCallback);
+
 private:
 	UPROPERTY(meta = (BindWidget))
 	UCommonTextBlock* CommonTextBlock_Title;
