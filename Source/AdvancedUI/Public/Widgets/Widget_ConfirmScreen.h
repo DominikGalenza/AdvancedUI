@@ -31,6 +31,7 @@ public:
 	static UConfirmScreenInfoObject* CreateOkScreen(const FText& ScreenTitleToShow, const FText& ScreenMessageToShow);
 	static UConfirmScreenInfoObject* CreateYesNoScreen(const FText& ScreenTitleToShow, const FText& ScreenMessageToShow);
 	static UConfirmScreenInfoObject* CreateOkCancelScreen(const FText& ScreenTitleToShow, const FText& ScreenMessageToShow);
+	static UConfirmScreenInfoObject* CreateYesNoCancelScreen(const FText& ScreenTitleToShow, const FText& ScreenMessageToShow);
 
 	UPROPERTY(Transient)
 	FText ScreenTitle;
