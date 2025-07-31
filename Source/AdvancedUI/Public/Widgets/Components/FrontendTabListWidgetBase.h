@@ -16,6 +16,9 @@ class ADVANCEDUI_API UFrontendTabListWidgetBase : public UCommonTabListWidgetBas
 {
 	GENERATED_BODY()
 	
+public:
+	void RequestRegisterTab(const FName& TabID, const FText& TabDisplayName);
+
 private:
 	//~ Begin UWidget Interface
 #if WITH_EDITOR	

@@ -5,6 +5,16 @@
 #include "Editor/WidgetCompilerLog.h"
 #include "Widgets/Components/FrontendButtonBase.h"
 
+void UFrontendTabListWidgetBase::RequestRegisterTab(const FName& TabID, const FText& TabDisplayName)
+{
+	RegisterTab(TabID, TabButtonEntryWidgetClass, nullptr);
+
+	if (UFrontendButtonBase* FoundButton = Cast<UFrontendButtonBase>(GetTabButtonBaseByID(TabID)))
+	{
+		FoundButton->SetButtonText(TabDisplayName);
+	}
+}
+
 #if WITH_EDITOR	
 void UFrontendTabListWidgetBase::ValidateCompiledDefaults(IWidgetCompilerLog& CompileLog) const
 {
