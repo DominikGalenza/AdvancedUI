@@ -5,9 +5,9 @@
 
 void UListDataObject_Base::InitializeDataObject()
 {
-	OnDataOjbectInitialized();
+	OnDataObjectInitialized();
 }
 
-void UListDataObject_Base::OnDataOjbectInitialized()
+void UListDataObject_Base::OnDataObjectInitialized()
 {
 }

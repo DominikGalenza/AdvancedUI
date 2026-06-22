@@ -34,7 +34,7 @@ public:
 
 protected:
 	//Empty in the base class. The child classes should overrid it to handle the initialization accordingly
-	virtual void OnDataOjbectInitialized();
+	virtual void OnDataObjectInitialized();
 
 private:
 	FName DataID;
