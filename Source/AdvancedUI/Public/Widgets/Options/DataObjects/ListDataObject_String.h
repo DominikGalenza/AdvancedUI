@@ -16,6 +16,8 @@ class ADVANCEDUI_API UListDataObject_String : public UListDataObject_Value
 	
 public:	
 	void AddDynamicOption(const FString& StringValue, const FText& DisplayText);
+	void AdvanceToNextOption();
+	void BackToPreviousOption();
 	
 protected:
 	//~ Begin UListDataObject_Base Interface

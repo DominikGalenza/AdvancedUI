@@ -18,4 +18,13 @@ void UWidget_ListEntry_Base::OnOwningListDataObjectSet(UListDataObject_Base* Own
 	{
 		CommonText_SettingsDisplayName->SetText(OwningListDataObject->GetDataDisplayName());
 	}
+
+	if (!OwningListDataObject->OnListDataModified.IsBoundToObject(this))
+	{
+		OwningListDataObject->OnListDataModified.AddUObject(this, &ThisClass::OnOwningListDataObjectModified);
+	}
+}
+
+void UWidget_ListEntry_Base::OnOwningListDataObjectModified(UListDataObject_Base* OwningModifiedData, EOptionsListDataModifyReason ModifyReason)
+{
 }
