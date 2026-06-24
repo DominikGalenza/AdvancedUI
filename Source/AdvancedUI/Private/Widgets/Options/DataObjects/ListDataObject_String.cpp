@@ -2,6 +2,8 @@
 
 
 #include "Widgets/Options/DataObjects/ListDataObject_String.h"
+#include "Widgets/Options/OptionsDataInteractionHelper.h"
+#include "FrontendDebugHelper.h"
 
 void UListDataObject_String::AddDynamicOption(const FString& StringValue, const FText& DisplayText)
 {
@@ -32,7 +34,12 @@ void UListDataObject_String::AdvanceToNextOption()
 
 	TrySetDisplayTextFromStringValue(CurrentStringValue);
 
-	NotifyListDataModified(this);
+	if (DataDynamicSetter)
+	{
+		DataDynamicSetter->SetValueFromString(CurrentStringValue);
+		Debug::Print(TEXT("DataDynamicSetter is used. The latest value from getter: ") + DataDynamicGetter->GetValueAsString());
+		NotifyListDataModified(this);
+	}
 }
 
 void UListDataObject_String::BackToPreviousOption()
@@ -58,7 +65,12 @@ void UListDataObject_String::BackToPreviousOption()
 
 	TrySetDisplayTextFromStringValue(CurrentStringValue);
 
-	NotifyListDataModified(this);
+	if (DataDynamicSetter)
+	{
+		DataDynamicSetter->SetValueFromString(CurrentStringValue);
+		Debug::Print(TEXT("DataDynamicSetter is used. The latest value from getter: ") + DataDynamicGetter->GetValueAsString());
+		NotifyListDataModified(this);
+	}
 }
 
 void UListDataObject_String::OnDataObjectInitialized()
@@ -68,7 +80,13 @@ void UListDataObject_String::OnDataObjectInitialized()
 		CurrentStringValue = AvailableOptionsStringArray[0];
 	}
 
-	//TODO::Read from the saved string value and use it to set the CurrentStringValue
+	if (DataDynamicGetter)
+	{
+		if (!DataDynamicGetter->GetValueAsString().IsEmpty())
+		{
+			CurrentStringValue = DataDynamicGetter->GetValueAsString();
+		}
+	}
 
 	if (!TrySetDisplayTextFromStringValue(CurrentStringValue))
 	{

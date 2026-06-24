@@ -24,7 +24,8 @@ protected:
 	//~ End UUserWidget interface
 
 	//~ Begin UCommonActivatableWidget interface
-	virtual void NativeOnActivated();
+	virtual void NativeOnActivated() override;
+	virtual void NativeOnDeactivated() override;
 	//~ End UCommonActivatableWidget interface
 
 private:
