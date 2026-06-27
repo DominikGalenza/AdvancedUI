@@ -33,6 +33,8 @@ private:
 
 	void OnResetBoundActionTriggered();
 	void OnBackBoundActionTriggered();
+	void OnListViewItemHovered(UObject* HoveredItem, bool bWasHovered);
+	void OnListViewItemSelected(UObject* SelectedItem);
 
 	UFUNCTION()
 	void OnOptionsTabSelected(FName TabID);
