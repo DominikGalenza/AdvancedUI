@@ -8,7 +8,7 @@
 #include "FrontendSettings/FrontendGameUserSettings.h"
 
 #define MAKE_OPTIONS_DATA_CONTROL(SetterOrGetterFunctionName) \
-	MakeShared<FOptionsDataInteractionHelper>(GET_FUNCTION_NAME_CHECKED(UFrontendGameUserSettings, SetterOrGetterFunctionName))
+	MakeShared<FOptionsDataInteractionHelper>(GET_FUNCTION_NAME_STRING_CHECKED(UFrontendGameUserSettings, SetterOrGetterFunctionName))
 
 void UOptionsDataRegistry::InitializeOptionsDataRegistry(ULocalPlayer* OwningLocalPlayer)
 {
