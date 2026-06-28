@@ -9,6 +9,7 @@
 class UOptionsDataRegistry;
 class UFrontendTabListWidgetBase;
 class UFrontendCommonListView;
+class UWidget_OptionsDetailsView;
 
 /**
  * 
@@ -39,12 +40,17 @@ private:
 	UFUNCTION()
 	void OnOptionsTabSelected(FName TabID);
 
+	FString TryGetEntryWidgetClassName(UObject* OwningListItem) const;
+
 	//Bound widgets//
 	UPROPERTY(meta = (BindWidget))
 	UFrontendTabListWidgetBase* TabListWidget_OptionsTabs;
 
 	UPROPERTY(meta = (BindWidget))
 	UFrontendCommonListView* CommonListView_OptionsList;
+
+	UPROPERTY(meta = (BindWidget))
+	UWidget_OptionsDetailsView* DetailsView_ListEntryInfo;
 	//Bound widgets//
 
 	//Handle creation of data in the options screen. Direct access to this variable is forbidden

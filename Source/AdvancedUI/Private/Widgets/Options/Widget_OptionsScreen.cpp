@@ -10,6 +10,7 @@
 #include "Widgets/Components/FrontendCommonListView.h"
 #include "FrontendSettings/FrontendGameUserSettings.h"
 #include "Widgets/Options/ListEntries/Widget_ListEntry_Base.h"
+#include "Widgets/Options/Widget_OptionsDetailsView.h"
 #include "FrontendDebugHelper.h"
 
 void UWidget_OptionsScreen::NativeOnInitialized()
@@ -106,6 +107,24 @@ void UWidget_OptionsScreen::OnListViewItemHovered(UObject* HoveredItem, bool bWa
 
 	HoveredEntryWidget->NativeOnListEntryWidgetHovered(bWasHovered);
 
+	if (bWasHovered)
+	{
+		DetailsView_ListEntryInfo->UpdateDetailsViewInfo(
+			CastChecked<UListDataObject_Base>(HoveredItem),
+			TryGetEntryWidgetClassName(HoveredItem)
+		);
+	}
+	else
+	{
+		if (UListDataObject_Base* SelectedItem = CommonListView_OptionsList->GetSelectedItem<UListDataObject_Base>())
+		{
+			DetailsView_ListEntryInfo->UpdateDetailsViewInfo(
+				SelectedItem,
+				TryGetEntryWidgetClassName(SelectedItem)
+			);
+		}
+	}
+
 	//const FString DebugString =
 	//	CastChecked<UListDataObject_Base>(HoveredItem)->GetDataDisplayName().ToString() +
 	//	TEXT(" was ") +
@@ -120,6 +139,11 @@ void UWidget_OptionsScreen::OnListViewItemSelected(UObject* SelectedItem)
 	{
 		return;
 	}
+
+	DetailsView_ListEntryInfo->UpdateDetailsViewInfo(
+		CastChecked<UListDataObject_Base>(SelectedItem),
+		TryGetEntryWidgetClassName(SelectedItem)
+	);
 
 	//const FString DebugString =
 	//	CastChecked<UListDataObject_Base>(SelectedItem)->GetDataDisplayName().ToString() +
@@ -140,4 +164,14 @@ void UWidget_OptionsScreen::OnOptionsTabSelected(FName TabID)
 		CommonListView_OptionsList->NavigateToIndex(0);
 		CommonListView_OptionsList->SetSelectedIndex(0);
 	}
+}
+
+FString UWidget_OptionsScreen::TryGetEntryWidgetClassName(UObject* OwningListItem) const
+{
+	if (UUserWidget* FoundEntryWidget = CommonListView_OptionsList->GetEntryWidgetFromItem(OwningListItem))
+	{
+		return FoundEntryWidget->GetClass()->GetName();
+	}
+
+	return TEXT("Entry Widget not valid");
 }
